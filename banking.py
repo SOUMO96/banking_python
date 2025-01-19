@@ -3,14 +3,14 @@ import random
 import pyrebase
 
 firebaseConfig = {
-    'apiKey': "AIzaSyD8CWPvCWMMwIORVs8BpwXTsVBRBIB1Bxo",
-    'authDomain': "banking-f5a0e.firebaseapp.com",
-    'databaseURL': "https://banking-f5a0e-default-rtdb.firebaseio.com",
-    'projectId': "banking-f5a0e",
-    'storageBucket': "banking-f5a0e.firebasestorage.app",
-    'messagingSenderId': "1440267974",
-    'appId': "1:1440267974:web:16f53353d817fd559aa1c7",
-    'measurementId': "G-2MLQEH5BKE"
+    'apiKey': "add your api_key ",
+    'authDomain': "add domain",
+    'databaseURL': "add realtime database url",
+    'projectId': "id ",
+    'storageBucket': "",
+    'messagingSenderId': "",
+    'appId': "",
+    'measurementId': ""
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig)
@@ -84,14 +84,14 @@ def add_account():
     password = input("ENTER A PASSWORD: ")
     hashed_password = hash_password(password)
 
-    # Check if user already exists in Firebase Authentication
+    
     try:
-        # Try signing in first to check if account exists
+      
         user = auth.sign_in_with_email_and_password(login_name, password)
         print("Account already exists!")
         return
     except:
-        # If the account doesn't exist, create a new one
+        # 
         try:
             user = auth.create_user_with_email_and_password(login_name, password)
             print("Successfully created account")
@@ -104,7 +104,7 @@ def add_account():
     new_account = BankingUpdate(name, age, balance, account_number, phone_number, gender, category, login_name, hashed_password)
     banking_updates.append(new_account)
 
-    # Push account details to Firebase Realtime Database after successful user creation
+   
     data = {
         "name": name,
         "age": age,
@@ -133,7 +133,7 @@ def fetch_data():
         print("Account not found")
         return
 
-    # Retrieve data from Firebase Realtime Database
+   
     users = db.get()
     for item in users.each():
         account_data = item.val()
@@ -157,7 +157,7 @@ def update_balance():
     password = input("ENTER YOUR PASSWORD: ")
     hashed_password_input = hash_password(password)
 
-    # Retrieve data from Firebase Realtime Database and update balance
+    
     users = db.get()
     for item in users.each():
         account_data = item.val()
@@ -183,7 +183,7 @@ def withdrawal():
     password = input("ENTER YOUR PASSWORD: ")
     hashed_password_input = hash_password(password)
 
-    # Retrieve data from Firebase Realtime Database and process withdrawal
+    
     users = db.get()
     for item in users.each():
         account_data = item.val()
